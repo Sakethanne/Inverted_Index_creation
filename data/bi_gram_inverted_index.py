@@ -30,9 +30,10 @@ def index_files(directory):
 
 def write_index_to_file(index, filename):
     with open(filename, 'w') as file:
-        for word, doc_counts in index.items():
-            file.write(f"{word} ")
-            for doc_id, count in doc_counts.items():
+        for word in sorted(index.keys()):  # Sort keys alphabetically
+            doc_counts = index[word]
+            file.write(f"{word}     ")
+            for doc_id, count in sorted(doc_counts.items()):  # Sort doc_ids alphabetically
                 file.write(f"{doc_id}:{count} ")
             file.write("\n")
 
